@@ -1,6 +1,7 @@
 package com.loct.appetite;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Menu;
 
@@ -69,5 +70,24 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    public void openDrawer(View view) {
+        if(drawer.isOpen()){
+            drawer.closeDrawer(Gravity.LEFT);
+        }else{
+            drawer.openDrawer(Gravity.LEFT);
+        }
+    }
+
+    public void goBack(View view) {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        navController.navigateUp();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
     }
 }
