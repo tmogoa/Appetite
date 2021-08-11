@@ -7,19 +7,43 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.loct.appetite.ui.home.HomeFragment"
+        android:name="com.loct.appetite.ui.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.loct.appetite.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
-
+        android:id="@+id/nav_auth"
+        android:name="com.loct.appetite.ui.AuthFragment"
+        android:label="fragment_auth"
+        tools:layout="@layout/fragment_auth" />
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.loct.appetite.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_budget"
+        android:name="com.loct.appetite.ui.BudgetFragment"
+        android:label="fragment_budget"
+        tools:layout="@layout/fragment_budget" />
+    <fragment
+        android:id="@+id/nav_meal"
+        android:name="com.loct.appetite.ui.MealFragment"
+        android:label="fragment_meal"
+        tools:layout="@layout/fragment_meal" />
+    <fragment
+        android:id="@+id/nav_fav"
+        android:name="com.loct.appetite.ui.FavFragment"
+        android:label="fragment_fav"
+        tools:layout="@layout/fragment_fav" />
+    <fragment
+        android:id="@+id/nav_new_dish"
+        android:name="com.loct.appetite.ui.NewDishFragment"
+        android:label="fragment_new_dish"
+        tools:layout="@layout/fragment_new_dish" />
+    <fragment
+        android:id="@+id/nav_dishes"
+        android:name="com.loct.appetite.ui.DishesFragment"
+        android:label="fragment_dishes"
+        tools:layout="@layout/fragment_dishes" />
+    <fragment
+        android:id="@+id/nav_dish"
+        android:name="com.loct.appetite.ui.DishFragment"
+        android:label="fragment_dish"
+        tools:layout="@layout/fragment_dish" />
 </navigation>
