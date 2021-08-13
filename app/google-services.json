@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "808495759464",
+    "project_id": "appetite-671cd",
+    "storage_bucket": "appetite-671cd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:808495759464:android:c97445c67f2ac2cbcbfbdd",
+        "android_client_info": {
+          "package_name": "com.loct.appetite"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "808495759464-84cp20jgtvagph2klfhlj9al3l6ce87s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADMHA7EUJpkz8dQu90sDhY-WXC7ELt-y0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "808495759464-84cp20jgtvagph2klfhlj9al3l6ce87s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
