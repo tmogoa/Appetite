@@ -46,4 +46,5 @@
         android:name="com.loct.appetite.ui.DishFragment"
         android:label="fragment_dish"
         tools:layout="@layout/fragment_dish" />
+
 </navigation>
