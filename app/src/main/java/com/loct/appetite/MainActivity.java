@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("");
-        setSupportActionBar(toolbar);
+        //setSupportActionBar(toolbar);
 //        binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {

@@ -24,5 +24,25 @@
             android:id="@+id/nav_dishes"
             android:icon="@drawable/ic_fork_n_knife"
             android:title="@string/menu_dishes" />
+        <item android:title="@string/profile">
+            <menu>
+                <item
+                    android:id="@+id/editprofile"
+                    android:checkable="true"
+                    android:icon="@drawable/ic_editprofile"
+                    android:title="@string/edit_profile" />
+                <item
+                    android:id="@+id/change_password"
+                    android:checkable="true"
+                    android:icon="@drawable/ic_changepassword"
+                    android:title="@string/change_password" />
+                <item
+                    android:id="@+id/logout"
+                    android:checkable="true"
+                    android:icon="@drawable/ic_logout"
+                    android:title="@string/logout" />
+            </menu>
+        </item>
     </group>
+
 </menu>
