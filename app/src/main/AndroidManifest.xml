@@ -10,28 +10,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Appetite">
+        android:theme="@style/Theme.Appetite.NoActionBar">
         <activity
-            android:name=".VerifyEmailActivity"
-            android:exported="true" />
-        <activity
-            android:name=".ForgetPasswordActivity"
-            android:exported="true" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true" />
-        <activity
-            android:name=".LoginActivity"
-            android:exported="true" />
-        <activity
-            android:name=".RegisterActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.Appetite.NoActionBar">
+            android:name=".MainActivity" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
     </application>
