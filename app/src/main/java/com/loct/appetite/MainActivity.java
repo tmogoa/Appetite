@@ -1,10 +1,13 @@
 package com.loct.appetite;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -14,10 +17,17 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.loct.appetite.ui.HomeFragmentDirections;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+    private static final String TAG = "MainActivity";
     private AppBarConfiguration mAppBarConfiguration;
     private DrawerLayout drawer;
+    private Toolbar toolbar;
+
+    private FirebaseAuth fa;
 
     private ImageView backBtn;
 
@@ -26,14 +36,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("");
 
         backBtn = findViewById(R.id.back_btn);
 
+        fa = FirebaseAuth.getInstance();
+
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-
+        navigationView.setNavigationItemSelectedListener(this);
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home)
@@ -47,6 +59,12 @@ public class MainActivity extends AppCompatActivity {
                 backBtn.setVisibility(View.VISIBLE);
             }else{
                 backBtn.setVisibility(View.INVISIBLE);
+            }
+
+            if(navController.getCurrentDestination().getId() == R.id.nav_auth){
+                toolbar.setVisibility(View.GONE);
+            }else{
+                toolbar.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -69,5 +87,33 @@ public class MainActivity extends AppCompatActivity {
     public void goBack(View view) {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         navController.navigateUp();
+    }
+
+    private void authenticate() {
+        FirebaseUser currentUser = fa.getCurrentUser();
+        if(currentUser == null){
+            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+            navController.navigate(HomeFragmentDirections.actionNavHomeToNavAuth());
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //authenticate();
+    }
+
+    private void hideToolbar(){
+        toolbar.setVisibility(View.GONE);
+    }
+
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Log.d(TAG, "options selectec");
+
+
+        drawer.closeDrawer(Gravity.LEFT);
+        return true;
     }
 }

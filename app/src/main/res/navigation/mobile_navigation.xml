@@ -9,13 +9,25 @@
         android:id="@+id/nav_home"
         android:name="com.loct.appetite.ui.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_to_nav_auth"
+            app:destination="@id/nav_auth"
+            app:popUpTo="@id/nav_home"
+            app:popUpToInclusive="true" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_auth"
         android:name="com.loct.appetite.ui.AuthFragment"
         android:label="fragment_auth"
-        tools:layout="@layout/fragment_auth" />
+        tools:layout="@layout/fragment_auth" >
+        <action
+            android:id="@+id/action_nav_auth_to_nav_home"
+            app:destination="@id/nav_home"
+            app:popUpTo="@id/nav_auth"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/nav_budget"
         android:name="com.loct.appetite.ui.BudgetFragment"
@@ -46,5 +58,16 @@
         android:name="com.loct.appetite.ui.DishFragment"
         android:label="fragment_dish"
         tools:layout="@layout/fragment_dish" />
+    <fragment
+        android:id="@+id/nav_sign_out"
+        android:name="com.loct.appetite.SignOutFragment"
+        android:label="fragment_sign_out"
+        tools:layout="@layout/fragment_sign_out" >
+        <action
+            android:id="@+id/action_nav_sign_out_to_nav_home"
+            app:destination="@id/nav_home"
+            app:popUpTo="@id/nav_sign_out"
+            app:popUpToInclusive="true" />
+    </fragment>
 
 </navigation>
