@@ -1,4 +1,4 @@
-package com.loct.appetite;
+package com.loct.appetite.ui;
 
 import android.os.Bundle;
 
@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.loct.appetite.R;
 
 public class SignOutFragment extends Fragment {
 
@@ -19,8 +20,6 @@ public class SignOutFragment extends Fragment {
                              Bundle savedInstanceState) {
         FirebaseAuth.getInstance().signOut();
         requireActivity().finish();
-        //NavHostFragment.findNavController(this).navigate(SignOutFragmentDirections.actionNavSignOutToNavHome());
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_sign_out, container, false);
     }
 }

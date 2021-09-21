@@ -35,9 +35,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.loct.appetite.MainActivity;
 import com.loct.appetite.R;
 import com.loct.appetite.databinding.ActivityMainBinding;
+import com.loct.appetite.models.User;
 
 @SuppressWarnings("deprecation")
 public class AuthFragment extends Fragment {
@@ -48,6 +51,7 @@ public class AuthFragment extends Fragment {
     private GoogleSignInClient googleSignInClient;
     private FirebaseAuth firebaseAuth;
     private ProgressBar progressBar;
+    private DatabaseReference dr;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,6 +68,7 @@ public class AuthFragment extends Fragment {
         googleSignInClient = GoogleSignIn.getClient(getActivity(),googleSignInOptions);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        dr = FirebaseDatabase.getInstance().getReference();
 
         progressBar = view.findViewById(R.id.progressbar);
 
@@ -113,25 +118,10 @@ public class AuthFragment extends Fragment {
                 Log.d(TAG,"onSuccess Logged in");
                 //get Logged in user
                 FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                //get user info
-                String uid = firebaseUser.getUid();
-                String email=firebaseUser.getEmail();
 
-                Log.d(TAG,"OnSuccesEmail"+email);
-                Log.d(TAG,"OnSuccesEmail"+uid);
-
-                //check if user is new or existing
-                if(authResult.getAdditionalUserInfo().isNewUser())
-                {
-                    Log.d(TAG,"OnSuccess:Account Created"+email);
-                    Toast.makeText(getActivity(),"Account Created"+email,Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    //existing user
-                    Log.d(TAG,"on success: Existing user...\n"+email);
-                    Toast.makeText(getActivity(),"Account Created"+email,Toast.LENGTH_SHORT).show();
-
-                }
+                //saving user data to realtime db
+                User user = new User(false, 0);
+                dr.child("users").child(firebaseUser.getUid()).setValue(user);
 
                 NavHostFragment.findNavController(AuthFragment.this).navigate(AuthFragmentDirections.actionNavAuthToNavHome());
             }

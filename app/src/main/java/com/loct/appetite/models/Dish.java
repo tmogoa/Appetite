@@ -1,4 +1,4 @@
-package com.loct.appetite;
+package com.loct.appetite.models;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -43,7 +43,7 @@ public class Dish {
 
     }
 
-    class saveDishCommand implements Command{
+    class saveDishCommand implements Command {
 
         public void execute(){
 

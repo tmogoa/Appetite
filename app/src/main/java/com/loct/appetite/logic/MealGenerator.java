@@ -1,4 +1,6 @@
-package com.loct.appetite;
+package com.loct.appetite.logic;
+
+import com.loct.appetite.models.FoodType;
 
 import java.util.Stack;
 

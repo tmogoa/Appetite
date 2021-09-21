@@ -1,4 +1,4 @@
-package com.loct.appetite;
+package com.loct.appetite.models;
 
 import java.util.Vector;
 
