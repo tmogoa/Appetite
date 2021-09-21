@@ -3,12 +3,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/framelayout"
     tools:context=".ui.AuthFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/logo"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="20dp"></ImageView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:textSize="18sp"
+            android:textColor="@color/browser_actions_text_color"
+            android:text="Leave us the hard work of curating your meals for you, so that you focus on eating."
+            android:layout_gravity="center_horizontal"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="30dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:text="That's what really matters" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="60dp"/>
+        <ImageButton
+            android:id="@+id/googlelogin"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:src="@drawable/googleg_standard_color_18"
+            android:layout_gravity="center_horizontal"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="60dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mgoogleTv"
+            android:layout_gravity="center_horizontal"/>
+        <ProgressBar
+            android:id="@+id/progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone"/>
+
+
+
+    </LinearLayout>
 
 </FrameLayout>

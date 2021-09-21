@@ -46,5 +46,15 @@
         android:name="com.loct.appetite.ui.DishFragment"
         android:label="fragment_dish"
         tools:layout="@layout/fragment_dish" />
+    <fragment
+        android:id="@+id/editprofile"
+        android:name="com.loct.appetite.ui.EditProfileFragment"
+        android:label="fragment_editprofile"
+        tools:layout="@layout/fragment_edit_profile" />
+    <fragment
+        android:id="@+id/logout"
+        android:name="com.loct.appetite.ui.LogoutFragment"
+        android:label="fragment_logout"
+        tools:layout="@layout/fragment_logout" />
 
 </navigation>
