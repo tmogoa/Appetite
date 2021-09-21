@@ -55,6 +55,7 @@ public class AuthFragment extends Fragment {
 binding=ActivityMainBinding.inflate(inflater,container,false);
 View v=binding.getRoot();
 
+
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_auth, container, false);
         ImageButton signin=(ImageButton) view.findViewById(R.id.googlelogin);
