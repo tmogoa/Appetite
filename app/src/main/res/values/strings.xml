@@ -10,7 +10,7 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="menu_budget">My budget</string>
     <string name="menu_fav">Favourites</string>
@@ -23,4 +23,17 @@
     <string name="register_with_us">Register with us</string>
     <string name="web_client_id">808495759464-84cp20jgtvagph2klfhlj9al3l6ce87s.apps.googleusercontent.com</string>
     <string name="sign_out">Sign out</string>
+    <string name="click_to_add_image">Click to add image</string>
+    <string name="add_a_dish">Add a dish</string>
+    <string name="name_of_dish">Name of dish</string>
+    <string name="price">Price</string>
+    <string name="has_mini">Has mini</string>
+
+    <string-array name="food_types">
+        <item>Carbohydrate</item>
+        <item>Protein</item>
+        <item>Vitamin</item>
+        <item>Drink</item>
+    </string-array>
+
 </resources>

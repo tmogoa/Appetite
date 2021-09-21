@@ -43,11 +43,4 @@ public class Dish {
 
     }
 
-    class saveDishCommand implements Command {
-
-        public void execute(){
-
-        }
-    }
-
 }
