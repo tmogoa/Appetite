@@ -1,10 +1,12 @@
 package com.loct.appetite.models;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.loct.appetite.util.Command;
 
 public class Dish {
     private String dishId, dishName, description, imageId;
@@ -28,6 +30,14 @@ public class Dish {
 
     }
 
+    public Dish(boolean forInsert){
+        if(forInsert){
+            this.dishNodeReference = FirebaseDatabase.getInstance().getReference().child(Dish.DISH_NODE);
+            dishId = dishNodeReference.push().getKey();
+            hidden = false;
+        }
+    }
+
     private void generateId(){
        DatabaseReference newNode = this.dishNodeReference.push();
        this.dishId = newNode.getKey();
@@ -45,15 +55,15 @@ public class Dish {
      * Pass Dish.NO_ID string to generate a new id
      * @param dishId - The Id of the dish. pass Dish.NO_ID to generate a new Id for adding new dish
      */
-    public void saveDish(String dishId){
-        setDishId(dishId);
+    public void saveDish(Command command){
         writeToFirebase("dishName", dishName);
         writeToFirebase("dishId", this.dishId);
         writeToFirebase("description", description);
         writeToFirebase("imageId", imageId);
         writeToFirebase("price", price);
         writeToFirebase("miniPrice", miniPrice);
-        writeToFirebase("hidden", hidden);
+        writeToFirebase("foodType", foodType);
+        writeToFirebase("hasMini", hasMini, command);
 
     }
 
@@ -85,6 +95,16 @@ public class Dish {
     private void writeToFirebase(String path, Object data){
         DatabaseReference dishRef = this.dishNodeReference.child(this.dishId);
         dishRef.child(path).setValue(data);
+    }
+
+    private void writeToFirebase(String path, Object data, Command command){
+        DatabaseReference dishRef = this.dishNodeReference.child(this.dishId);
+        dishRef.child(path).setValue(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                command.execute();
+            }
+        });
     }
 
     public void setDishId(String dishId) {

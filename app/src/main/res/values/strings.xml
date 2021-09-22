@@ -31,6 +31,7 @@
     <string name="kes">KES</string>
     <string name="generate">Generate</string>
     <string name="dishes">Dishes</string>
+    <string name="desc_sample">Animal protein, rich in omega 3. Orginates from the lake.</string>
 
     <string-array name="food_types">
         <item>Carbohydrate</item>
