@@ -122,7 +122,7 @@ public class NewDishFragment extends Fragment implements AdapterView.OnItemSelec
 
                         class onSuccess implements Command {
                             public void execute(){
-                                Toast.makeText(requireContext(), "Dish saved", Toast.LENGTH_SHORT);
+                                Toast.makeText(requireContext(), "Dish saved", Toast.LENGTH_SHORT).show();
                             }
                         }
 

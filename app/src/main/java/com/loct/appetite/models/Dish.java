@@ -2,6 +2,7 @@ package com.loct.appetite.models;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -53,7 +54,7 @@ public class Dish {
 
     /**
      * Pass Dish.NO_ID string to generate a new id
-     * @param dishId - The Id of the dish. pass Dish.NO_ID to generate a new Id for adding new dish
+     * @param command - code to be execute on succes
      */
     public void saveDish(Command command){
         writeToFirebase("dishName", dishName);
@@ -126,6 +127,19 @@ public class Dish {
 
     public String getDescription() {
         return description;
+    }
+
+    public static Dish setUpFromSnapshot(DataSnapshot ss){
+        Dish dish = new Dish(ss.child("dishId").toString());
+        dish.setImageId(ss.child("imageId").getValue().toString());
+        dish.setDishName(ss.child("dishName").getValue().toString());
+        dish.setHasMini(Boolean.parseBoolean(ss.child("hasMini").getValue().toString()));
+        dish.setHidden(Boolean.parseBoolean(ss.child("hidden").getValue().toString()));
+        dish.setPrice(Double.parseDouble(ss.child("price").getValue().toString()));
+        dish.setMiniPrice(Double.parseDouble(ss.child("miniPrice").getValue().toString()));
+        dish.setDescription(ss.child("description").getValue().toString());
+
+        return dish;
     }
 
     public void setDescription(String description) {
