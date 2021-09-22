@@ -1,10 +1,19 @@
 package com.loct.appetite.models;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.util.ArrayList;
 
 public class Dish {
     private String dishId, dishName, description, imageId;
@@ -27,9 +36,6 @@ public class Dish {
         hidden = false;
     }
 
-    private void fetchDish(String id){
-
-    }
 
     private void generateId(){
        DatabaseReference newNode = this.dishNodeReference.push();
@@ -53,6 +59,7 @@ public class Dish {
         writeToFirebase("miniPrice", miniPrice);
         writeToFirebase("hidden", hidden);
         writeToFirebase("foodType", foodType);
+        writeToFirebase("hasMini", hasMini);
 
     }
 
@@ -105,6 +112,19 @@ public class Dish {
 
     public String getDescription() {
         return description;
+    }
+
+    public static Dish setUpFromSnapshot(DataSnapshot ss){
+        Dish dish = new Dish(ss.child("dishId").toString());
+        dish.setImageId(ss.child("imageId").getValue().toString());
+        dish.setDishName(ss.child("dishName").getValue().toString());
+        dish.setHasMini(Boolean.parseBoolean(ss.child("hasMini").getValue().toString()));
+        dish.setHidden(Boolean.parseBoolean(ss.child("hidden").getValue().toString()));
+        dish.setPrice(Double.parseDouble(ss.child("price").getValue().toString()));
+        dish.setMiniPrice(Double.parseDouble(ss.child("miniPrice").getValue().toString()));
+        dish.setDescription(ss.child("description").getValue().toString());
+
+        return dish;
     }
 
     public void setDescription(String description) {

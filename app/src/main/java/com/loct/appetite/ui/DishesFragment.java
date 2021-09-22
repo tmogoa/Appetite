@@ -2,6 +2,7 @@ package com.loct.appetite.ui;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +13,11 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.loct.appetite.R;
 import com.loct.appetite.models.Dish;
 import com.loct.appetite.models.FoodType;
@@ -39,16 +45,22 @@ public class DishesFragment extends Fragment {
 
         List<Dish> dishes = new ArrayList<>();
 
-        for (int i = 0; i < 20; i++) {
-            Dish dish = new Dish();
-            dish.setDishName("Fish");
-            dish.setFoodType(FoodType.protein);
-            dish.setDescription("Animal protein, rich in omega 3. Originates from the lake.");
-            dish.setPrice(200);
-            dish.setMiniPrice(90);
+        DatabaseReference dishNodeRef = FirebaseDatabase.getInstance().getReference().child(Dish.DISH_NODE);
 
-            dishes.add(dish);
-        }
+        dishNodeRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ss: snapshot.getChildren()) {
+                    Dish dish = Dish.setUpFromSnapshot(ss);
+                    dishes.add(dish);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         DishesAdapter dishesAdapter = new DishesAdapter(dishes);
         recyclerView.setAdapter(dishesAdapter);
