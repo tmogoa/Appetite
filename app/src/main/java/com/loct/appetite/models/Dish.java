@@ -120,4 +120,43 @@ public class Dish {
         this.imageId = imageId;
     }
 
+    public boolean isHasMini() {
+        return hasMini;
+    }
+
+    public void setHasMini(boolean hasMini) {
+        this.hasMini = hasMini;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public double getMiniPrice() {
+        return miniPrice;
+    }
+
+    public void setMiniPrice(double miniPrice) {
+        this.miniPrice = miniPrice;
+    }
+
+    public boolean isHidden() {
+        return hidden;
+    }
+
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
+    }
+
+    public FoodType getFoodType() {
+        return foodType;
+    }
+
+    public void setFoodType(FoodType foodType) {
+        this.foodType = foodType;
+    }
 }
