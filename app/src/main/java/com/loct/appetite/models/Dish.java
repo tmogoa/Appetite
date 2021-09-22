@@ -64,6 +64,7 @@ public class Dish {
         writeToFirebase("price", price);
         writeToFirebase("miniPrice", miniPrice);
         writeToFirebase("foodType", foodType);
+        writeToFirebase("hidden", hidden);
         writeToFirebase("hasMini", hasMini, command);
 
     }
@@ -138,6 +139,7 @@ public class Dish {
         dish.setPrice(Double.parseDouble(ss.child("price").getValue().toString()));
         dish.setMiniPrice(Double.parseDouble(ss.child("miniPrice").getValue().toString()));
         dish.setDescription(ss.child("description").getValue().toString());
+        dish.setFoodType(FoodType.valueOf(ss.child("foodType").getValue().toString()));
 
         return dish;
     }

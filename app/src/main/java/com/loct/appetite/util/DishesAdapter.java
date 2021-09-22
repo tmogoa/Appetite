@@ -12,15 +12,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.loct.appetite.R;
 import com.loct.appetite.models.Dish;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder> {
 
     private List<Dish> dishes;
+    private Context context;
 
-    public  DishesAdapter(List<Dish> dishes){
+    public  DishesAdapter(List<Dish> dishes, Context context){
         this.dishes = dishes;
+        this.context = context;
     }
 
     @NonNull
@@ -38,14 +41,15 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Dish dish =  dishes.get(position);
 
-        //need to set image too
-        //holder.imgDishDisplay.setImageDrawable();
-
         holder.txtDishNameDisplay.setText(dish.getDishName());
         holder.txtFoodTypeDisplay.setText(dish.getFoodType().toString());
         holder.txtDescDisplay.setText(dish.getDescription());
         holder.txtPriceDisplay.setText(Double.toString(dish.getPrice()));
         holder.txtPriceMiniDisplay.setText(Double.toString(dish.getMiniPrice()));
+        Picasso.with(context)
+                .load(dish.getImageId())
+                .into(holder.imgDishDisplay);
+
     }
 
     @Override

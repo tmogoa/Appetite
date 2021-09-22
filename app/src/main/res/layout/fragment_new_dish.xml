@@ -173,8 +173,8 @@
             android:layout_marginEnd="16dp"
             android:ems="10"
             android:gravity="start|top"
-            android:text="@string/desc_sample"
             android:inputType="textMultiLine"
+            android:text="@string/desc_sample"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_description" />
@@ -187,11 +187,22 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:text="Save"
             android:onClick="saveDish"
+            android:text="Save"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/progress_dish_save"
             app:layout_constraintTop_toBottomOf="@+id/edit_description" />
+
+        <ProgressBar
+            android:id="@+id/progress_dish_save"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btn_save" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

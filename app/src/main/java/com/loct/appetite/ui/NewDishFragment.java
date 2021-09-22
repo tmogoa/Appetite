@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,6 +52,7 @@ public class NewDishFragment extends Fragment implements AdapterView.OnItemSelec
     private Spinner spinner;
     private Uri uriDishImage;
     private Button btnSave;
+    private ProgressBar progressDishSave;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,6 +71,7 @@ public class NewDishFragment extends Fragment implements AdapterView.OnItemSelec
         cbHasMini = v.findViewById(R.id.check_has_mini);
         imgAddImg = v.findViewById(R.id.img_add_img);
         btnSave = v.findViewById(R.id.btn_save);
+        progressDishSave = v.findViewById(R.id.progress_dish_save);
 
         spinner = v.findViewById(R.id.spinner_food_type);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(requireContext(),
@@ -93,6 +97,7 @@ public class NewDishFragment extends Fragment implements AdapterView.OnItemSelec
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressDishSave.setVisibility(View.VISIBLE);
                 handleSaveDish();
             }
         });
@@ -123,6 +128,8 @@ public class NewDishFragment extends Fragment implements AdapterView.OnItemSelec
                         class onSuccess implements Command {
                             public void execute(){
                                 Toast.makeText(requireContext(), "Dish saved", Toast.LENGTH_SHORT).show();
+                                progressDishSave.setVisibility(View.GONE);
+                                NavHostFragment.findNavController(NewDishFragment.this).navigate(NewDishFragmentDirections.actionNavNewDishToNavDishes());
                             }
                         }
 

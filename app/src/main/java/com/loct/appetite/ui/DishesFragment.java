@@ -30,6 +30,8 @@ public class DishesFragment extends Fragment {
 
     private ImageView imgSearch;
     private EditText editDishSearch;
+
+    private DishesAdapter dishesAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -54,6 +56,7 @@ public class DishesFragment extends Fragment {
                     Dish dish = Dish.setUpFromSnapshot(ss);
                     dishes.add(dish);
                 }
+                dishesAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -62,7 +65,7 @@ public class DishesFragment extends Fragment {
             }
         });
 
-        DishesAdapter dishesAdapter = new DishesAdapter(dishes);
+        dishesAdapter = new DishesAdapter(dishes, requireContext());
         recyclerView.setAdapter(dishesAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         return v;
@@ -73,7 +76,7 @@ public class DishesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 int visibility = editDishSearch.getVisibility();
-                editDishSearch.setVisibility(visibility == View.VISIBLE ? View.INVISIBLE : View.VISIBLE);
+                editDishSearch.setVisibility(visibility == View.VISIBLE ? View.GONE : View.VISIBLE);
             }
         });
     }
