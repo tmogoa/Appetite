@@ -14,8 +14,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.loct.appetite.R;
+import com.loct.appetite.models.Dish;
 
 public class NewDishFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
@@ -27,6 +29,7 @@ public class NewDishFragment extends Fragment implements AdapterView.OnItemSelec
     private ImageView imgAddImg;
     private CheckBox cbHasMini;
     private Spinner spinner;
+    private String foodType, imageId = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,7 +68,7 @@ public class NewDishFragment extends Fragment implements AdapterView.OnItemSelec
 
     public void selectImage() {
         //open and select image, you may do a preview using the same view
-
+        //we implement this later
 
     }
 
@@ -79,11 +82,43 @@ public class NewDishFragment extends Fragment implements AdapterView.OnItemSelec
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         CharSequence cs = (CharSequence) parent.getItemAtPosition(position);
         //get as string
-        //cs.toString();
+        foodType = cs.toString();
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
         //doing nothing
     }
+
+    public void saveDish(View view){
+
+        if(foodType.equals("")){
+            Toast.makeText(getContext(), "Select the food type", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Dish newDish = new Dish(Dish.NO_ID);
+        newDish.setDishName(getStringFromUi(editDishName));
+        newDish.setDescription(getStringFromUi(editDescription));
+        newDish.setPrice(getDouble(editPrice));
+        newDish.setMiniPrice((hasMini)? getDouble(editPriceMini): newDish.getPrice());
+        newDish.setHasMini(hasMini);
+        newDish.setFoodType(foodType);
+        newDish.setImageId(Dish.DISH_ID);
+
+        newDish.saveDish();
+
+        //move to the next screen here
+
+    }
+
+    private String getStringFromUi(EditText view){
+        return view.getText().toString().trim();
+    }
+
+    private Double getDouble(EditText view){
+        return Double.parseDouble(getStringFromUi(view));
+    }
+
+
 }

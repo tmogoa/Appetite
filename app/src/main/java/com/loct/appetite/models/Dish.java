@@ -11,16 +11,20 @@ public class Dish {
     private boolean hasMini, hidden;
     private double price, miniPrice;
 
+    private String foodType;
+
     private DatabaseReference dishNodeReference;
 
     //constants
     public static final String DISH_NODE = "dishes";
     public static final String DISH_IMAGES = "dish_images";
     public static final String NO_ID = "";
+    public static final String DISH_ID = "DISH_ID";
 
     public Dish(String id){
         setDishId(id);
         this.dishNodeReference = FirebaseDatabase.getInstance().getReference().child(Dish.DISH_NODE);
+        hidden = false;
     }
 
     private void fetchDish(String id){
@@ -38,10 +42,9 @@ public class Dish {
 
     /**
      * Pass Dish.NO_ID string to generate a new id
-     * @param dishId - The Id of the dish. pass Dish.NO_ID to generate a new Id for adding new dish
+     * The Id of the dish should be set. pass Dish.NO_ID to generate a new Id for adding new dish
      */
-    public void saveDish(String dishId){
-        setDishId(dishId);
+    public void saveDish(){
         writeToFirebase("dishName", dishName);
         writeToFirebase("dishId", this.dishId);
         writeToFirebase("description", description);
@@ -49,6 +52,7 @@ public class Dish {
         writeToFirebase("price", price);
         writeToFirebase("miniPrice", miniPrice);
         writeToFirebase("hidden", hidden);
+        writeToFirebase("foodType", foodType);
 
     }
 
@@ -111,7 +115,16 @@ public class Dish {
         return imageId;
     }
 
+    /**
+     * Sets the image id of the dish
+     * @param imageId - the image id should be Dish.DISH_ID if you want the image id to be the dishs id.
+     *                Ensure that you have called setId before call this method
+     */
     public void setImageId(String imageId) {
+        if(imageId.equals(DISH_ID)){
+            this.imageId = this.dishId;
+            return;
+        }
         this.imageId = imageId;
     }
 
@@ -145,5 +158,13 @@ public class Dish {
 
     public void setHidden(boolean hidden) {
         this.hidden = hidden;
+    }
+
+    public String getFoodType() {
+        return foodType;
+    }
+
+    public void setFoodType(String foodType) {
+        this.foodType = foodType;
     }
 }
