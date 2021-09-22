@@ -8,39 +8,142 @@ import com.google.firebase.storage.StorageReference;
 
 public class Dish {
     private String dishId, dishName, description, imageId;
-    private boolean hasMini;
+    private boolean hasMini, hidden;
     private double price, miniPrice;
 
     private DatabaseReference dishNodeReference;
-    private FirebaseAuth authenticatedUser;
-    private StorageReference firebaseStorage;
 
     //constants
     public static final String DISH_NODE = "dishes";
     public static final String DISH_IMAGES = "dish_images";
+    public static final String NO_ID = "";
 
-    public Dish(FirebaseAuth authenticatedUser){
-
-        this.authenticatedUser = authenticatedUser;
-        this.firebaseStorage = FirebaseStorage.getInstance().getReference().child(Dish.DISH_IMAGES);
+    public Dish(String id){
+        setDishId(id);
         this.dishNodeReference = FirebaseDatabase.getInstance().getReference().child(Dish.DISH_NODE);
+    }
 
+    private void fetchDish(String id){
+
+    }
+
+    private void generateId(){
+       DatabaseReference newNode = this.dishNodeReference.push();
+       this.dishId = newNode.getKey();
     }
 
     public void removeDish(){
+        this.dishNodeReference.removeValue();
+    }
+
+    /**
+     * Pass Dish.NO_ID string to generate a new id
+     * @param dishId - The Id of the dish. pass Dish.NO_ID to generate a new Id for adding new dish
+     */
+    public void saveDish(String dishId){
+        setDishId(dishId);
+        writeToFirebase("dishName", dishName);
+        writeToFirebase("dishId", this.dishId);
+        writeToFirebase("description", description);
+        writeToFirebase("imageId", imageId);
+        writeToFirebase("price", price);
+        writeToFirebase("miniPrice", miniPrice);
+        writeToFirebase("hidden", hidden);
 
     }
 
-    public void saveDish(){
-
-    }
-
+    /**
+     * Make sure that the dish id is set
+     */
     public void hideDish(){
-
+        this.setHidden(true);
+        writeToFirebase("hidden", hidden);
     }
 
+    /**
+     * The dish Id should be set
+     */
     public void unhideDish(){
-
+        setHidden(false);
+        writeToFirebase("hidden", hidden);
     }
 
+    public String getDishId() {
+        return dishId;
+    }
+
+    /**
+     * Writes to firebase on behalf of the dish class
+     * @param path - the database path of the child node under the dish node
+     * @param data - the object to write at the path
+     */
+    private void writeToFirebase(String path, Object data){
+        DatabaseReference dishRef = this.dishNodeReference.child(this.dishId);
+        dishRef.child(path).setValue(data);
+    }
+
+    public void setDishId(String dishId) {
+        if(dishId.equals("")){
+            generateId();
+            return;
+        }
+
+        this.dishId = dishId;
+    }
+
+    public String getDishName() {
+        return dishName;
+    }
+
+    public void setDishName(String dishName) {
+        this.dishName = dishName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(String imageId) {
+        this.imageId = imageId;
+    }
+
+    public boolean isHasMini() {
+        return hasMini;
+    }
+
+    public void setHasMini(boolean hasMini) {
+        this.hasMini = hasMini;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public double getMiniPrice() {
+        return miniPrice;
+    }
+
+    public void setMiniPrice(double miniPrice) {
+        this.miniPrice = miniPrice;
+    }
+
+    public boolean isHidden() {
+        return hidden;
+    }
+
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
+    }
 }
