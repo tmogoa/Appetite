@@ -66,6 +66,7 @@ public class NewDishFragment extends Fragment implements AdapterView.OnItemSelec
     public void selectImage() {
         //open and select image, you may do a preview using the same view
 
+
     }
 
     public void toggleMini() {
