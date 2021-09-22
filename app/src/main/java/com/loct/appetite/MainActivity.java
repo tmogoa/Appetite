@@ -6,6 +6,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private AppBarConfiguration mAppBarConfiguration;
     private DrawerLayout drawer;
     private Toolbar toolbar;
+    private View headerLayout;
 
     private FirebaseAuth fa;
 
@@ -47,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        headerLayout = navigationView.getHeaderView(0);
+
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home)
                 .setOpenableLayout(drawer)
@@ -65,6 +69,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 toolbar.setVisibility(View.GONE);
             }else{
                 toolbar.setVisibility(View.VISIBLE);
+            }
+
+            if(navController.getCurrentDestination().getId() == R.id.nav_auth){
+                setUserDetailsInNavHeader();
             }
         });
     }
@@ -101,6 +109,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onStart() {
         super.onStart();
         //authenticate();
+        setUserDetailsInNavHeader();
     }
 
     private void hideToolbar(){
@@ -115,5 +124,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         drawer.closeDrawer(Gravity.LEFT);
         return true;
+    }
+
+    private void setUserDetailsInNavHeader(){
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if(firebaseUser != null){
+            ((TextView) headerLayout.findViewById(R.id.user_name_display)).setText(firebaseUser.getDisplayName());
+            ((TextView) headerLayout.findViewById(R.id.email_display)).setText(firebaseUser.getEmail());
+        }
+
     }
 }

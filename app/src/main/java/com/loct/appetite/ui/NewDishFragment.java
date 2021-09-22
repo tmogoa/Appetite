@@ -74,8 +74,9 @@ public class NewDishFragment extends Fragment implements AdapterView.OnItemSelec
 
     public void toggleMini() {
         hasMini = cbHasMini.isChecked();
-        txtPriceMini.setVisibility(hasMini ? View.VISIBLE : View.INVISIBLE);
-        editPriceMini.setVisibility(hasMini ? View.VISIBLE : View.INVISIBLE);
+        int visibility = hasMini ? View.VISIBLE : View.INVISIBLE;
+        txtPriceMini.setVisibility(visibility);
+        editPriceMini.setVisibility(visibility);
     }
 
     @Override

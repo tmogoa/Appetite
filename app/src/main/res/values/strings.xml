@@ -28,6 +28,9 @@
     <string name="name_of_dish">Name of dish</string>
     <string name="price">Price</string>
     <string name="has_mini">Has mini</string>
+    <string name="kes">KES</string>
+    <string name="generate">Generate</string>
+    <string name="dishes">Dishes</string>
 
     <string-array name="food_types">
         <item>Carbohydrate</item>
